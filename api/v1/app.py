@@ -10,6 +10,7 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 # declare method to handle @app.teardown_appcontext that calls storage.close()
 @app.teardown_appcontext
+"""Close storage when done."""
 def teardown(response_or_exc):
     storage.close()
 
