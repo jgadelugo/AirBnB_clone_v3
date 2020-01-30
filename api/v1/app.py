@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Create ABNB API
-from flask import Flask, Blueprint
 """main app file."""
+from flask import Flask, Blueprint
 
 app = Flask(__name__)
 from models import storage
