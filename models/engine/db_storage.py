@@ -79,10 +79,10 @@ class DBStorage:
         """ get specific obj by class and id """
         if cls and id:
             try:
-                objs = self.all(cls).values()
-                for obj in objs:
-                    if obj.id == id:
-                        return (obj)
+                objs = self.all(cls)
+                for key in objs.keys():
+                    if key.split(".")[-1] == id:
+                        return (objs[key])
             except:
                 pass
         return (None)

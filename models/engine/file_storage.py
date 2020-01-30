@@ -74,9 +74,9 @@ class FileStorage:
         if cls and id:
             try:
                 objs = self.all(cls).values()
-                for obj in objs:
-                    if obj.id == id:
-                        return (obj)
+                for key in objs.keys():
+                    if key.split(".")[-1] == id:
+                        return (objs[key])
             except:
                 pass
         return (None)
