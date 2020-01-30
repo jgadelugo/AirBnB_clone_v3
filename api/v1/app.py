@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# Create ABNB API
 """main app file."""
 from flask import Flask, Blueprint
 
