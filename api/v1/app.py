@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # Create ABNB API
+"""main app file."""
 from flask import Flask, Blueprint
 
 app = Flask(__name__)
@@ -10,9 +11,12 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 # declare method to handle @app.teardown_appcontext that calls storage.close()
 @app.teardown_appcontext
-"""Close storage when done."""
 def teardown(response_or_exc):
+    """Close storage when done."""
     storage.close()
 
+host = "0.0.0.0"
+port = 5000
+
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=True, host=host, port=port, threaded=True)
