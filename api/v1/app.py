@@ -19,7 +19,7 @@ def teardown(response_or_exc):
 
 
 @app.errorhandler(404)
-def not_found():
+def not_found(e):
     """return 404 message."""
     return {"error": "Not found"}
 
