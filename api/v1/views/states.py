@@ -7,8 +7,9 @@ from flask import jsonify, abort, request
 
 @app_views.route('/states', methods=['GET', 'POST'])
 def states():
-    """Retrieves the list of all State objects."""
+    """Default functions on all states."""
     if request.method == 'GET':
+        #Retrieves the list of all State objects
         states = []
         for v in storage.all('State').values():
             states.append(v.to_dict())
@@ -20,18 +21,20 @@ def states():
         body = request.get_json()
         if 'name' not in body.keys():
             return ("Missing name", 400)
-        body.save()
+#        body.save()
+        print("HELLLLLLLOOOOOOOOO: ", body)
         return State(body).to_dict(), 200
 
 @app_views.route('/states/<state_id>', methods=['GET', 'PUT', 'DELETE'])
 def state(state_id):
-    """Retrieve a state by id."""
+    """Default functions on a single state."""
     found = False
     for v in storage.all('State').values():
         if v.id == state_id:
             found = True
             break
     if request.method == 'GET':
+        #Retrieve a state by id.
         if found:
             return (v.to_dict(), 200)
         else:
@@ -47,5 +50,10 @@ def state(state_id):
             if key != 'id'  or key != 'created_at' or key != 'updated_at':
                 setattr(v, key, value)
         v.save()
-        return (v, 200)
-
+        return (v.to_dict(), 200)
+    elif requet.method == 'DELETE':
+        "Delete a state"
+        if not found:
+            abort(404)
+        v.delete()
+        storage.save(v)
