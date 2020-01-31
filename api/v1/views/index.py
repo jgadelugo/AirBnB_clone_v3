@@ -1,22 +1,20 @@
 #!/usr/bin/python3
 """Return status of API."""
+from models import storage
 from api.v1.views import app_views
-from models.storage import count
 @app_views.route('/status')
 def appviews():
     """Get status of API."""
     return {"status": "OK"}
 
 
-@app_view.route('/stats')
+@app_views.route('/stats')
 def stats():
     """retrieves the number of each objects by type."""
-    counts = {
-        "amenities": count("Amenities"), 
-        "cities": count("Cities"),
-        "places": count("Places"),
-        "reviews": count("Reviews"),
-        "states": count("States"),
-        "users": count("Users")
-}
-   return counts
+    return {
+        "amenities": storage.count("Amenities"), 
+        "cities": storage.count("Cities"),
+        "places": storage.count("Places"),
+        "reviews": storage.count("Reviews"),
+        "states": storage.count("States"),
+        "users": storage.count("Users")}
