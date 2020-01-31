@@ -20,7 +20,7 @@ def states():
         body = request.get_json()
         if 'name' not in body.keys():
             return ("Missing name", 400)
-#        body.save()
+        body.save()
         return State(body).to_dict(), 200
 
 @app_views.route('/states/<state_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -36,16 +36,16 @@ def state(state_id):
             return (v.to_dict(), 200)
         else:
             abort(404)
-    # elif request.method == 'PUT':
-    #     #Update a State object
-    #     if not found:
-    #         abort(404)
-    #     if not request.is_json:
-    #         return ("Not a JSON", 400)
-    #     body = request.get_json()
-    #     for key, value in body:
-    #         if key != 'id'  or key != 'created_at' or key != 'updated_at':
-    #             setattr(v, key, value)
-    #     v.save()
-    #     return (v, 200)
+    elif request.method == 'PUT':
+        #Update a State object
+        if not found:
+            abort(404)
+        if not request.is_json:
+            return ("Not a JSON", 400)
+        body = request.get_json()
+        for key, value in body:
+            if key != 'id'  or key != 'created_at' or key != 'updated_at':
+                setattr(v, key, value)
+        v.save()
+        return (v, 200)
 
