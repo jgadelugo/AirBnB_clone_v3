@@ -16,6 +16,10 @@ def teardown(response_or_exc):
     """handle @app.teardown_appcontext that calls storage.close()"""
     storage.close()
 
+@app.errorhandler(404)
+def not_found():
+    """return 404 message."""
+    return {"error": "Not found"}
 
 if __name__ == "__main__":
     app.run(debug=True, host=host, port=port, threaded=True)

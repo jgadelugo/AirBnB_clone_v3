@@ -11,12 +11,9 @@ def appviews():
 @app_view.route('/stats')
 def stats():
     """retrieves the number of each objects by type."""
-    counts = {
-        "amenities": count("Amenities"), 
-        "cities": count("Cities"),
-        "places": count("Places"),
-        "reviews": count("Reviews"),
-        "states": count("States"),
-        "users": count("Users")
-}
-   return counts
+    return {"amenities": count("Amenities"), 
+       	      "cities": count("Cities"),
+              "places": count("Places"),
+              "reviews": count("Reviews"),
+              "states": count("States"),
+              "users": count("Users")}
